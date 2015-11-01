@@ -1,7 +1,3 @@
-/**
- * Created by Jadwiga on 2015-11-01.
- */
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -49,7 +45,7 @@ public class FilmManager {
             deleteAllFilmStmt = connection
                     .prepareStatement("DELETE FROM Film");
             getAllFilmStmt = connection
-                    .prepareStatement("SELECT id, name, yob FROM Person");
+                    .prepareStatement("SELECT id, name, yob FROM Film");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,7 +56,7 @@ public class FilmManager {
         return connection;
     }
 
-    void clearPersons() {
+    void clearFilm() {
         try {
             deleteAllFilmStmt.executeUpdate();
         } catch (SQLException e) {
@@ -68,7 +64,7 @@ public class FilmManager {
         }
     }
 
-    public int addPerson(Film film) {
+    public int addFilm(Film film) {
         int count = 0;
         try {
             addFilmStmt.setString(1, film.getTytul());
@@ -82,7 +78,7 @@ public class FilmManager {
         return count;
     }
 
-    public List<Film> getAllPersons() {
+    public List<Film> getAllFilm() {
         List<Film> filmy = new ArrayList<Film>();
 
         try {

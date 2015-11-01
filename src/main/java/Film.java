@@ -1,6 +1,3 @@
-/**
- * Created by Jadwiga on 2015-11-01.
- */
     public class Film {
         private long id;
 
