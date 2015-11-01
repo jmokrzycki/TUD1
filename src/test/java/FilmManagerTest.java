@@ -23,22 +23,22 @@ public class FilmManagerTest {
         assertNotNull(filmManager.getConnection());
     }
 
-    @Test
-    public void checkAdding(){
-
-        Film film = new Film(IMIE_1, ROK_1);
-
-        filmManager.clearFilm();
-        assertEquals(1, filmManager.addFilm(film));
-
-        List<Film> filmy = filmManager.getAllFilm();
-        Film filmRetrieved = filmy.get(0);
-
-        assertEquals(IMIE_1, filmRetrieved.getTytul());
-        assertEquals(ROK_1, filmRetrieved.getRok_premiery());
-
-    }
-
+   // @Test
+   // public void checkAdding(){
+//
+   //     Film film = new Film(IMIE_1, ROK_1);
+//
+   //     filmManager.clearFilm();
+   //     assertEquals(1, filmManager.addFilm(film));
+//
+   //     List<Film> filmy = filmManager.getAllFilm();
+   //     Film filmRetrieved = filmy.get(0);
+//
+   //     assertEquals(IMIE_1, filmRetrieved.getTytul());
+   //     assertEquals(ROK_1, filmRetrieved.getRok_premiery());
+//
+   // }
+//
   // @Test
   // public void checkAdding_FK(){
 //
