@@ -21,7 +21,6 @@ public class FilmManager {
     private PreparedStatement getAllFilmStmt;
 
     private Statement statement;
-
     public FilmManager() {
         try {
             connection = DriverManager.getConnection(url);
@@ -41,11 +40,11 @@ public class FilmManager {
                 statement.executeUpdate(createTableFilm);
 
             addFilmStmt = connection
-                    .prepareStatement("INSERT INTO Film (name, yob) VALUES (?, ?)");
+                    .prepareStatement("INSERT INTO Film (tytul, rok_premiery) VALUES (?, ?)");
             deleteAllFilmStmt = connection
                     .prepareStatement("DELETE FROM Film");
             getAllFilmStmt = connection
-                    .prepareStatement("SELECT id, name, yob FROM Film");
+                    .prepareStatement("SELECT id, tytul, rok_premiery FROM Film");
 
         } catch (SQLException e) {
             e.printStackTrace();

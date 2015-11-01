@@ -63,11 +63,11 @@ public class RezyserManager {
         }
     }
 
-    public int addRezyser(Film film) {
+    public int addRezyser(Rezyser rezyser) {
         int count = 0;
         try {
-            addRezyserStmt.setString(1, film.getTytul());
-            addRezyserStmt.setString(2, film.getRok_premiery());
+            addRezyserStmt.setString(1, rezyser.getImie());
+            addRezyserStmt.setString(2, rezyser.getNazwisko());
 
             count = addRezyserStmt.executeUpdate();
 
