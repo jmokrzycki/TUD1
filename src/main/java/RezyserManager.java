@@ -40,11 +40,11 @@ public class RezyserManager {
                 statement.executeUpdate(createTableFilm);
 
             addRezyserStmt = connection
-                    .prepareStatement("INSERT INTO Rezyser (name, yob) VALUES (?, ?)");
+                    .prepareStatement("INSERT INTO Rezyser (imie, nazwisko) VALUES (?, ?)");
             deleteAllRezyserStmt = connection
                     .prepareStatement("DELETE FROM Rezyser");
             getAllRezyserStmt = connection
-                    .prepareStatement("SELECT id, name, yob FROM Rezyser");
+                    .prepareStatement("SELECT id, imie,nazwisko FROM Rezyser");
 
         } catch (SQLException e) {
             e.printStackTrace();
