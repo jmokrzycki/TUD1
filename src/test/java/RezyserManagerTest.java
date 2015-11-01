@@ -26,7 +26,7 @@ public class RezyserManagerTest {
 
         Rezyser rezyser = new Rezyser(IMIE_1, NAZWISKO_1);
 
-        rezyserManager.clearRezyser();
+        //rezyserManager.clearRezyser();
         assertEquals(1, rezyserManager.addRezyser(rezyser));
 
         List<Rezyser> rezyserzy = rezyserManager.getAllRezyser();

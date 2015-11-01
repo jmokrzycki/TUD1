@@ -1,9 +1,9 @@
     public class Film {
-        private long id;
+        private int id;
 
         private String tytul;
         private String rok_premiery;
-        //private int id_rezyser;
+        private int id_rezyser;
 
         public Film() {
         }
@@ -13,16 +13,22 @@
             this.tytul = tytul;
             this.rok_premiery = rok_premiery;
         }
-       // public Film(String tytul, String rok_premiery, int id_rezyser) {
-       //     super();
-       //     this.tytul = tytul;
-       //     this.rok_premiery = rok_premiery;
-       //     this.id_rezyser = id_rezyser;
-       // }
-        public long getId() {
+        public Film(String tytul, String rok_premiery, int id_rezyser) {
+            super();
+            this.tytul = tytul;
+            this.rok_premiery = rok_premiery;
+            this.id_rezyser = id_rezyser;
+        }
+
+        public Film(int id, int id_rezyser){
+            this.id = id;
+            this.id_rezyser = id_rezyser;
+        }
+
+        public int getId() {
             return id;
         }
-        public void setId(long id) {
+        public void setId(int id) {
             this.id = id;
         }
         public String getTytul() {
@@ -37,11 +43,12 @@
         public void setRok_premiery(String rok_premiery) {
             this.rok_premiery = rok_premiery;
         }
-       //public int getId_rezyser(){
-       //    return id_rezyser;
-       //}
-       //public void setId_rezyser(int id_rezyser) {
-       //    this.id_rezyser = id_rezyser;
-       //}
+        public int getId_rezyser(){
+            return id_rezyser;
+        }
+        public void setId_rezyser(int id_rezyser) {
+            this.id_rezyser = id_rezyser;
+        }
+
 
     }
