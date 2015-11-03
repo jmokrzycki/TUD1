@@ -18,64 +18,89 @@ public class FilmManagerTest {
     private final static String IMIE_1 = "Zenek";
     private final static String ROK_1 = "1945";
 
-
-
-
-
-
    @Test
    public void checkConnection(){
        assertNotNull(filmManager.getConnection());
    }
 
- @Test
- public void checkAdding(){
+@Test
+public void checkAdding(){
+    Film film = new Film(IMIE_1, ROK_1);
 
-     Film film = new Film(IMIE_1, ROK_1);
+    filmManager.clearFilm();
+    assertEquals(1, filmManager.addFilm(film));
 
-     filmManager.clearFilm();
-     assertEquals(1, filmManager.addFilm(film));
+    List<Film> filmy = filmManager.getAllFilm();
+    Film filmRetrieved = filmy.get(0);
 
-     List<Film> filmy = filmManager.getAllFilm();
-     Film filmRetrieved = filmy.get(0);
+    assertEquals(IMIE_1, filmRetrieved.getTytul());
+    assertEquals(ROK_1, filmRetrieved.getRok_premiery());
+}
 
-     assertEquals(IMIE_1, filmRetrieved.getTytul());
-     assertEquals(ROK_1, filmRetrieved.getRok_premiery());
+//@Test //dodatkowa funkcja do testow
+//public void checkAdding2(){
 
- }
+//    Film film = new Film(IMIE_1, ROK_1, FK_REZYSER_1);
 
-// @Test //nie potrzebna funkcja
-// public void checkAdding2(){
-//
-//     Film film = new Film(IMIE_1, ROK_1, FK_REZYSER_1);
-//
-//     filmManager.clearFilm();
-//     assertEquals(1, filmManager.addFilm2(film));
-//
-//     List<Film> filmy = filmManager.getAllFilm();
-//     Film filmRetrieved = filmy.get(0);
-//
-//     assertEquals(IMIE_1, filmRetrieved.getTytul());
-//     assertEquals(ROK_1, filmRetrieved.getRok_premiery());
-//
-// }
+//    filmManager.clearFilm();
+//    assertEquals(1, filmManager.addFilmWithRezyser(film));
 
-  @Test
-  public void checkaddRezyserToFilm(){
-      //filmManager.clearFilm();
+//    List<Film> filmy = filmManager.getAllFilm();
+//    Film filmRetrieved = filmy.get(0);
 
-      List<Film> filmy = filmManager.getAllFilm();
-      List<Rezyser> rezyserzy = rezyserManager.getAllRezyser();
+//    assertEquals(IMIE_1, filmRetrieved.getTytul());
+//    assertEquals(ROK_1, filmRetrieved.getRok_premiery());
 
-      Film film = filmy.get(0);
-      Rezyser rezyser = rezyserzy.get(0);
+//}
 
-      film.setId_rezyser(rezyser.getId());
+@Test
+public void checkAddRezyserToFilm(){
+    filmManager.clearFilm();
+    Rezyser rezyser = new Rezyser("Zenek", "1945");
+    rezyserManager.addRezyser(rezyser);
+    filmManager.addFilm(new Film("Zenek", "1945"));
 
-      assertEquals(1, filmManager.addRezyserToFilm(film));
 
-      Film filmRetrieved = filmy.get(0);
+    List<Film> filmy = filmManager.getAllFilm();
+    List<Rezyser> rezyserzy = rezyserManager.getAllRezyser();
+    Film film = new Film(filmy.get(0).getTytul(), filmy.get(0).getRok_premiery(), rezyserzy.get(0).getId());
+    filmManager.addRezyserToFilm(film);
 
-      assertEquals(rezyser.getId(), filmRetrieved.getId_rezyser());
-  }
+
+    List<Film> filmy1 = filmManager.getAllFilm();
+    Film film1 = filmy1.get(0);
+    List<Rezyser> rezyserzy1 = rezyserManager.getAllRezyser();
+    Rezyser rezyser1 = rezyserzy1.get(0);
+    assertEquals(rezyser1.getId(), film1.getId_rezyser());
+}
+
+   @Test
+   public void checkRemoveRezyserFromFilm(){
+       filmManager.clearFilm();
+       rezyserManager.clearRezyser();
+       rezyserManager.addRezyser(new Rezyser("Zenek", "1945"));
+       List<Rezyser> rezyserzy = rezyserManager.getAllRezyser();
+       Film film = new Film("Zenek", "1945", rezyserzy.get(0).getId());
+       filmManager.addFilmWithRezyser(film);
+
+       filmManager.removeRezyserFromFilm(filmManager.getAllFilm().get(0));
+
+       List<Film> filmy = filmManager.getAllFilm();
+       Film filmRetrieved = filmy.get(0);
+       assertEquals(0, filmRetrieved.getId_rezyser());
+   }
+
+    @Test
+    public void checkGetAllRezyserInFilm(){
+        filmManager.clearFilm();
+        rezyserManager.clearRezyser();
+        rezyserManager.addRezyser(new Rezyser("Zenek", "Zenek"));
+        rezyserManager.addRezyser(new Rezyser("Zenek", "Zenek"));
+        List<Rezyser> rezyserzy = rezyserManager.getAllRezyser();
+        filmManager.addFilmWithRezyser(new Film("Zenek", "1945", rezyserzy.get(0).getId()));
+        filmManager.addFilmWithRezyser(new Film("Zenek", "1945", rezyserzy.get(1).getId()));
+        filmManager.addFilm(new Film("Zenek", "1945"));
+
+        assertEquals(2, this.filmManager.getAllRezyserInFilm());
+    }
 }
